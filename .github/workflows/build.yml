@@ -1,0 +1,48 @@
+name: フレームワーク依存型と自己完結型のビルドと成果物の生成
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+
+jobs:
+  build:
+    name: フレームワーク依存型と自己完結型のビルドと成果物の生成
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+
+      - name: Setup .NET 8 SDK
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Restore dependencies
+        run: dotnet restore MediaPlayerOS1_CsharpWPF_TestEdition_2505.sln
+
+      - name: Build project (Debug)
+        run: dotnet build MediaPlayerOS1_CsharpWPF_TestEdition_2505.sln --configuration Release --no-restore
+
+      # Publish Framework-dependent build
+      - name: Publish Framework-dependent build
+        run: dotnet publish MediaPlayerOS1_CsharpWPF_TestEdition_2505/MediaPlayerOS1_CsharpWPF_TestEdition_2505.csproj --configuration Release --output publish/framework-dependent --runtime win-x64 --self-contained false
+
+      # Publish Self-contained build
+      - name: Publish Self-contained build
+        run: dotnet publish MediaPlayerOS1_CsharpWPF_TestEdition_2505/MediaPlayerOS1_CsharpWPF_TestEdition_2505.csproj --configuration Release --output publish/self-contained --runtime win-x64 --self-contained true /p:PublishTrimmed=false
+
+      # Upload both builds as artifacts
+      - name: Upload Framework-dependent Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: MediaPlayerOS_Csharp_TestEdition-framework-dependent
+          path: publish/framework-dependent
+
+      - name: Upload Self-contained Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: MediaPlayerOS_Csharp_TestEdition-self-contained
+          path: publish/self-contained
