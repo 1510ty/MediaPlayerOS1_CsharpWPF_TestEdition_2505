@@ -8,12 +8,19 @@
         Title="MainWindow" Width="1280" Height="735">
     <Viewbox>
         <Grid  Width="1280" Height="720">
-            <Grid x:Name="StartingorShutdownMediaPlayerOSGrid">
-                <Label x:Name="StartingorShutdownMediaPlayerOSLabel" Content="" HorizontalAlignment="Left" Margin="4,-26,0,0" VerticalAlignment="Top" Height="333" Width="1212" FontSize="100"/>
+            <Grid x:Name="StartingorShutdownMediaPlayerOSGrid" Visibility="Collapsed">
+                <Label x:Name="StartingorShutdownMediaPlayerOSLabel" Content="" HorizontalAlignment="Left" Margin="4,-26,0,0" VerticalAlignment="Top" Height="333" Width="1276" FontSize="100"/>
                 <ProgressBar x:Name="StartStopProgress" HorizontalAlignment="Center" Height="41" Margin="0,669,0,0" VerticalAlignment="Top" Width="1260"/>
             </Grid>
-            <Grid x:Name="Desktop">
-                
+            <Grid x:Name="Desktop" Visibility="Collapsed">
+                <Button x:Name="StartButton" Content="スタート" Margin="10,665,1170,10" Click="StartButton_Click"/>
+                <Grid x:Name="StartMenu" Margin="10,10,850,60" Visibility="Collapsed">
+                    <Button x:Name="dengenbutton" Content="電源" HorizontalAlignment="Left" Margin="0,605,0,0" VerticalAlignment="Top" Height="45" Width="90" Click="dengenbutton_Click"/>
+                    <Grid x:Name="dengen" Margin="0,462,330,45" Visibility="Collapsed">
+                        <Button x:Name="ShutdownButton" Content="シャットダウン" HorizontalAlignment="Center" Margin="0,97,0,0" VerticalAlignment="Top" Height="43" Width="84" Click="ShutdownButton_Click"/>
+                    </Grid>
+
+                </Grid>
             </Grid>
         </Grid>
     </Viewbox>
