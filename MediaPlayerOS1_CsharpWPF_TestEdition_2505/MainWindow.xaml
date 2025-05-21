@@ -5,8 +5,16 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MediaPlayerOS1_CsharpWPF_TestEdition_2505"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-
-    </Grid>
+        Title="MainWindow" Width="1280" Height="735">
+    <Viewbox>
+        <Grid  Width="1280" Height="720">
+            <Grid x:Name="StartingorShutdownMediaPlayerOSGrid">
+                <Label x:Name="StartingorShutdownMediaPlayerOSLabel" Content="" HorizontalAlignment="Left" Margin="4,-26,0,0" VerticalAlignment="Top" Height="333" Width="1212" FontSize="100"/>
+                <ProgressBar x:Name="StartStopProgress" HorizontalAlignment="Center" Height="41" Margin="0,669,0,0" VerticalAlignment="Top" Width="1260"/>
+            </Grid>
+            <Grid x:Name="Desktop">
+                
+            </Grid>
+        </Grid>
+    </Viewbox>
 </Window>
