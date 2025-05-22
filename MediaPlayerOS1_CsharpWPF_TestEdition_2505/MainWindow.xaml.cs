@@ -1,14 +1,5 @@
 ﻿using System.Diagnostics;
-using System.Text;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace MediaPlayerOS1_CsharpWPF_TestEdition_2505
 {
@@ -18,6 +9,8 @@ namespace MediaPlayerOS1_CsharpWPF_TestEdition_2505
     public partial class MainWindow : Window
     {
         private int StartStopProgressValue;
+        private MediaPlayerOSinfoWindow mediaplayerosinfowindow;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -100,6 +93,27 @@ namespace MediaPlayerOS1_CsharpWPF_TestEdition_2505
             {
                 Application.Current.Shutdown();
             }
+        }
+
+        private void MediaPlayerOSinfoView()
+        {
+
+
+            mediaplayerosinfowindow = new MediaPlayerOSinfoWindow();
+            mediaplayerosinfowindow.Show();
+
+            this.Closed += (s, e) =>
+            {
+                if (mediaplayerosinfowindow != null)
+                {
+                    mediaplayerosinfowindow.Close(); // メインウィンドウ閉じるときにサブウィンドウも閉じる
+                }
+            };
+        }
+
+        private void MediaPlayerOSinfo_Click(object sender, RoutedEventArgs e)
+        {
+            MediaPlayerOSinfoView();
         }
     }
 }
